@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorial Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff7eb3, #8e44ad);
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff7eb3;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff4a8d;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .output p {
+            margin: 0;
+        }
+
+        .error {
+            color: #ff4a4a;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Factorial Calculator</h1>
+        <input type="number" id="number-input" placeholder="Enter a positive integer">
+        <button id="calculate-iterative">Calculate (Iterative)</button>
+        <button id="calculate-recursive">Calculate (Recursive)</button>
+        <div class="output" id="output"></div>
+    </div>
+
+    <script>
+        const numberInput = document.getElementById('number-input');
+        const outputDiv = document.getElementById('output');
+
+        function validateInput(value) {
+            const num = parseInt(value, 10);
+            if (isNaN(num) || num < 0) {
+                return { valid: false, error: "Please enter a valid positive integer." };
+            }
+            return { valid: true, value: num };
+        }
+
+        function calculateFactorialIterative(n) {
+            let result = 1;
+            for (let i = 1; i <= n; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        function calculateFactorialRecursive(n) {
+            if (n === 0 || n === 1) return 1;
+            return n * calculateFactorialRecursive(n - 1);
+        }
+
+        function displayOutput(method, result) {
+            outputDiv.innerHTML = `<p><strong>Method:</strong> ${method}</p><p><strong>Result:</strong> ${result}</p>`;
+        }
+
+        function handleCalculate(method) {
+            const validation = validateInput(numberInput.value);
+            if (!validation.valid) {
+                outputDiv.innerHTML = `<p class="error">${validation.error}</p>`;
+                return;
+            }
+
+            const number = validation.value;
+            let result;
+
+            if (method === 'iterative') {
+                result = calculateFactorialIterative(number);
+            } else if (method === 'recursive') {
+                result = calculateFactorialRecursive(number);
+            }
+
+            displayOutput(method.charAt(0).toUpperCase() + method.slice(1), result);
+        }
+
+        document.getElementById('calculate-iterative').addEventListener('click', () => handleCalculate('iterative'));
+        document.getElementById('calculate-recursive').addEventListener('click', () => handleCalculate('recursive'));
+    </script>
+</body>
+</html>
