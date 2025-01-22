@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found</title>
+  <style>
+    /* General Reset */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      height: 100%;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .error-content {
+      max-width: 600px;
+    }
+
+    .error-title {
+      font-size: 8rem;
+      font-weight: bold;
+      color: #ff6b6b;
+      margin: 0;
+    }
+
+    .error-message {
+      font-size: 1.5rem;
+      margin: 10px 0 20px;
+    }
+
+    .animation img {
+      width: 150px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .navigation {
+      margin: 20px 0;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 5px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .button:hover {
+      background: #0056b3;
+    }
+
+    .search {
+      margin: 20px 0;
+    }
+
+    .search input {
+      padding: 10px;
+      width: 70%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    .search-button {
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .search-button:hover {
+      background: #218838;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      color: #ff6b6b;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="error-content">
+      <h1 class="error-title">404</h1>
+      <p class="error-message">Oops! The page you're looking for doesn't exist.</p>
+      <div class="animation">
+        <img src="https://via.placeholder.com/150" alt="Lost character illustration">
+      </div>
+      <nav class="navigation">
+        <a href="/" class="button">Go Home</a>
+        <a href="/contact" class="button">Contact Us</a>
+      </nav>
+      <form id="search-form" class="search">
+        <input type="text" id="search-input" placeholder="Search for a page..." required>
+        <button type="submit" class="search-button">Search</button>
+      </form>
+      <div id="error-feedback" class="feedback"></div>
+    </section>
+  </main>
+  <script>
+    document.getElementById('search-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const input = document.getElementById('search-input').value.trim();
+      const feedback = document.getElementById('error-feedback');
+
+      if (!input) {
+        feedback.textContent = "Please enter a valid search query.";
+        feedback.style.display = "block";
+      } else {
+        feedback.style.display = "none";
+        alert(`Searching for: ${input}`);
+        // Redirect or handle search functionality
+        // Example: window.location.href = `/search?q=${encodeURIComponent(input)}`;
+      }
+    });
+  </script>
+</body>
+</html>
