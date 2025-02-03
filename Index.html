@@ -3,28 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 - Page Not Found</title>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Recipe Sharing Platform</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="container">
-    <section class="error-content">
-      <h1 class="error-title">404</h1>
-      <p class="error-message">Oops! The page you're looking for doesn't exist.</p>
-      <div class="animation">
-        <img src="https://via.placeholder.com/150" alt="Lost character illustration">
-      </div>
-      <nav class="navigation">
-        <a href="/" class="button">Go Home</a>
-        <a href="/contact" class="button">Contact Us</a>
-      </nav>
-      <form id="search-form" class="search">
-        <input type="text" id="search-input" placeholder="Search for a page..." required>
-        <button type="submit" class="search-button">Search</button>
-      </form>
-      <div id="error-feedback" class="feedback"></div>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#recipes">Recipes</a></li>
+        <li><a href="#profile">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="search">
+      <input type="text" id="search-bar" placeholder="Search for recipes..." />
+      <label for="category">Category:</label>
+      <select id="category">
+        <option value="all">All</option>
+        <option value="vegetarian">Vegetarian</option>
+        <option value="gluten-free">Gluten-Free</option>
+      </select>
+    </section>
+
+    <section id="recipes">
+      <!-- Recipe cards will be dynamically added here -->
     </section>
   </main>
-  <script src="script.js"></script>
+
+  <footer>
+    <p>&copy; 2025 Recipe Sharing Platform</p>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
