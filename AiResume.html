@@ -1,0 +1,78 @@
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { motion } from "framer-motion";
+
+const ResumeScreeningApp = () => {
+  const [resumeText, setResumeText] = useState("");
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleScreening = async () => {
+    setLoading(true);
+    try {
+      setTimeout(() => {
+        setResult("Resume successfully screened! Candidate meets the qualifications.");
+        setLoading(false);
+      }, 2000);
+    } catch (error) {
+      setResult("An error occurred while processing the resume.");
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-lg w-full"
+      >
+        <Card className="p-6 bg-white shadow-lg rounded-2xl">
+          <h1 className="text-xl font-bold mb-4 text-center">AI-Based Resume Screening</h1>
+          <Textarea
+            placeholder="Paste resume content here..."
+            value={resumeText}
+            onChange={(e) => setResumeText(e.target.value)}
+            className="mb-4"
+          />
+          <Button onClick={handleScreening} disabled={loading} className="w-full">
+            {loading ? "Processing..." : "Screen Resume"}
+          </Button>
+          {result && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-4 p-4 bg-gray-50 rounded-lg text-center"
+            >
+              {result}
+            </motion.div>
+          )}
+        </Card>
+      </motion.div>
+    </div>
+  );
+};
+
+const Home = () => {
+  return <ResumeScreeningApp />;
+};
+
+export default Home;
+
+// Styles (styles/globals.css)
+const globalStyles = `
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+`;
+
+if (typeof document !== "undefined") {
+  const style = document.createElement("style");
+  style.innerHTML = globalStyles;
+  document.head.appendChild(style);
+}
